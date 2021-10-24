@@ -11,19 +11,34 @@
       <td rowspan="3">
         <strong> {{ currentDate | date: "EEEE, dd MMMM yyyy" }}</strong>
       </td>
-      <td>Veroni</td>
+      <td>
+        <a
+          href="https://www.menicka.cz/4921-veroni-coffee--chocolate.html"
+          target="_blank"
+        >
+          Veroni
+        </a>
+      </td>
       <td>
         <p>{{ veroniItemsToDisplay }}</p>
       </td>
     </tr>
     <tr>
-      <td>Suzies</td>
+      <td>
+        <a href="http://www.suzies.cz/poledni-menu.html" target="_blank">
+          Suzies
+        </a>
+      </td>
       <td>
         <p *ngFor="let item of suziesItemsToDiplay">{{ item }}</p>
       </td>
     </tr>
     <tr>
-      <td>Denni</td>
+      <td>
+        <a href="https://www.pivnice-ucapa.cz/denni-menu.php" target="_blank">
+          Denni
+        </a>
+      </td>
       <td>
         <p *ngFor="let item of denniItemsToDiplay">{{ item }}</p>
       </td>
