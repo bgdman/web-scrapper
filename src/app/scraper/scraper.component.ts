@@ -62,9 +62,9 @@ export class ScraperComponent implements OnInit {
 
   ngOnInit(): void {
     forkJoin([
-      this.menusService.getFromNode('veroni_coffee'),
-      this.menusService.getFromNode('suzies'),
-      this.menusService.getFromNode('denni_menu'),
+      this.menusService.getFromNodeScrapper('veroni_coffee'),
+      this.menusService.getFromNodeScrapper('suzies'),
+      this.menusService.getFromNodeScrapper('denni_menu'),
     ]).subscribe(([veroni, suzies, denni]) => {
       this.handleVeroniData(veroni);
       this.handleSuziesData(suzies);

@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class MenusService {
   constructor(private http: HttpClient) {}
 
-  getFromNode(shop: string) {
+  getFromNodeScrapper(shop: string) {
     return this.http.get(`http://localhost:3000/scrapper/${shop}`);
   }
 }
