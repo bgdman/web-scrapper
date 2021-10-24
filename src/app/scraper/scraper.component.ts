@@ -7,7 +7,7 @@ import { MenusService } from '../services/menus.service';
   styleUrls: ['./scraper.component.scss'],
 })
 export class ScraperComponent implements OnInit {
-  currentDate = new Date();
+  currentDate = new Date(2021, 9, 27);
   defaultItemsMissingMessage: string = 'No items in the menu for today';
   veroniItemsToDisplay: string = this.defaultItemsMissingMessage;
   suziesItemsToDiplay: string[] = [];
@@ -55,7 +55,7 @@ export class ScraperComponent implements OnInit {
     this.menusService.getFromNode('denni-menu').subscribe((res: any) => {
       for (let item of res) {
         const date = item.date.replace(/\s+/g, '');
-        if (this.isTodayAvailable(item.date)) {
+        if (this.isTodayAvailable(` ${date}`)) {
           for (let menuItem of item.item) {
             this.denniItemsToDiplay.push(menuItem);
           }
