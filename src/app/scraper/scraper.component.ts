@@ -7,7 +7,7 @@ import { MenusService } from '../services/menus.service';
   styleUrls: ['./scraper.component.scss'],
 })
 export class ScraperComponent implements OnInit {
-  currentDate = new Date(2021, 9, 27);
+  currentDate = new Date();
   defaultItemsMissingMessage: string = 'No items in the menu for today';
   veroniItemsToDisplay: string = this.defaultItemsMissingMessage;
   suziesItemsToDiplay: string[] = [];
