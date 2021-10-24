@@ -15,19 +15,14 @@ export class ScraperComponent implements OnInit {
 
   constructor(private menusService: MenusService) {}
 
-  dateParser(date: string) {
-    const newDate = date.split(' ')[1].split('.');
-    return new Date(
-      +newDate[2],
-      +newDate[1] - 1 < 1 ? 12 : +newDate[1] - 1,
-      +newDate[0]
-    );
-  }
-
   isTodayAvailable(date: string): boolean {
+    const newDate = date.split(' ')[1].split('.');
     return (
-      this.dateParser(date).setHours(0, 0, 0, 0) ===
-      this.currentDate.setHours(0, 0, 0, 0)
+      new Date(
+        +newDate[2],
+        +newDate[1] - 1 < 1 ? 12 : +newDate[1] - 1,
+        +newDate[0]
+      ).setHours(0, 0, 0, 0) === this.currentDate.setHours(0, 0, 0, 0)
     );
   }
 
