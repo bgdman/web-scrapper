@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { MenusService } from '../services/menus.service';
 
 @Component({
@@ -26,38 +27,48 @@ export class ScraperComponent implements OnInit {
     );
   }
 
+  handleVeroniData(veroni: any) {
+    for (let item of veroni) {
+      if (this.isTodayAvailable(item.date)) {
+        this.veroniItemsToDisplay = item.item;
+      }
+    }
+  }
+
+  handleSuziesData(suzies: any) {
+    for (let item of suzies) {
+      if (this.isTodayAvailable(item.date)) {
+        this.suziesItemsToDiplay.push(
+          `${item.title}: ${item.item.replace(/\s+/g, ' ')}`
+        );
+      }
+    }
+    if (this.suziesItemsToDiplay.length < 1)
+      this.suziesItemsToDiplay.push(this.defaultItemsMissingMessage);
+  }
+
+  handleDenniData(denni: any) {
+    for (let item of denni) {
+      const date = item.date.replace(/\s+/g, '');
+      if (this.isTodayAvailable(` ${date}`)) {
+        for (let menuItem of item.item) {
+          this.denniItemsToDiplay.push(menuItem);
+        }
+      }
+    }
+    if (this.denniItemsToDiplay.length < 1)
+      this.denniItemsToDiplay.push(this.defaultItemsMissingMessage);
+  }
+
   ngOnInit(): void {
-    this.menusService.getFromNode('veroni_coffee').subscribe((res: any) => {
-      for (let item of res) {
-        if (this.isTodayAvailable(item.date)) {
-          this.veroniItemsToDisplay = item.item;
-        }
-      }
-    });
-
-    this.menusService.getFromNode('suzies').subscribe((res: any) => {
-      for (let item of res) {
-        if (this.isTodayAvailable(item.date)) {
-          this.suziesItemsToDiplay.push(
-            `${item.title}: ${item.item.replace(/\s+/g, ' ')}`
-          );
-        }
-      }
-      if (this.suziesItemsToDiplay.length < 1)
-        this.suziesItemsToDiplay.push(this.defaultItemsMissingMessage);
-    });
-
-    this.menusService.getFromNode('denni_menu').subscribe((res: any) => {
-      for (let item of res) {
-        const date = item.date.replace(/\s+/g, '');
-        if (this.isTodayAvailable(` ${date}`)) {
-          for (let menuItem of item.item) {
-            this.denniItemsToDiplay.push(menuItem);
-          }
-        }
-      }
-      if (this.denniItemsToDiplay.length < 1)
-        this.denniItemsToDiplay.push(this.defaultItemsMissingMessage);
+    forkJoin([
+      this.menusService.getFromNode('veroni_coffee'),
+      this.menusService.getFromNode('suzies'),
+      this.menusService.getFromNode('denni_menu'),
+    ]).subscribe(([veroni, suzies, denni]) => {
+      this.handleVeroniData(veroni);
+      this.handleSuziesData(suzies);
+      this.handleDenniData(denni);
     });
   }
 }
