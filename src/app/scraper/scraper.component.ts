@@ -32,7 +32,7 @@ export class ScraperComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.menusService.getFromNode('veroni-coffee').subscribe((res: any) => {
+    this.menusService.getFromNode('veroni_coffee').subscribe((res: any) => {
       for (let item of res) {
         if (this.isTodayAvailable(item.date)) {
           this.veroniItemsToDisplay = item.item;
@@ -52,7 +52,7 @@ export class ScraperComponent implements OnInit {
         this.suziesItemsToDiplay.push(this.defaultItemsMissingMessage);
     });
 
-    this.menusService.getFromNode('denni-menu').subscribe((res: any) => {
+    this.menusService.getFromNode('denni_menu').subscribe((res: any) => {
       for (let item of res) {
         const date = item.date.replace(/\s+/g, '');
         if (this.isTodayAvailable(` ${date}`)) {
@@ -63,7 +63,6 @@ export class ScraperComponent implements OnInit {
       }
       if (this.denniItemsToDiplay.length < 1)
         this.denniItemsToDiplay.push(this.defaultItemsMissingMessage);
-      console.log('denni-menu res: ', res);
     });
   }
 }
