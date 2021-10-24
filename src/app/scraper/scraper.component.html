@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+      <th>Today</th>
+      <th>Restaurant</th>
+      <th>Items</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">{{ currentDate | date: "dd MMMM yyyy" }}</td>
+      <td>Veroni</td>
+      <td>
+        <p>{{ veroniItemsToDisplay }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Suzies</td>
+      <td>
+        <p *ngFor="let item of suziesItemsToDiplay">{{ item }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Denni</td>
+      <td>
+        <p *ngFor="let item of denniItemsToDiplay">{{ item }}</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
