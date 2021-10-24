@@ -1,14 +1,16 @@
 <table>
   <thead>
     <tr>
-      <th>Today</th>
+      <th>Today is</th>
       <th>Restaurant</th>
       <th>Items</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td rowspan="3">{{ currentDate | date: "dd MMMM yyyy" }}</td>
+      <td rowspan="3">
+        <strong> {{ currentDate | date: "EEEE, dd MMMM yyyy" }}</strong>
+      </td>
       <td>Veroni</td>
       <td>
         <p>{{ veroniItemsToDisplay }}</p>

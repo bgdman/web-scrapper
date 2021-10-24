@@ -30,6 +30,7 @@ export class ScraperComponent implements OnInit {
   handleVeroniData(veroni: any) {
     for (let item of veroni) {
       if (this.isTodayAvailable(item.date)) {
+        console.log('Pro tento den nebylo zadáno menu. ', item.item.toString());
         this.veroniItemsToDisplay = item.item;
       }
     }
