@@ -27,41 +27,33 @@ export class ScraperComponent implements OnInit {
     );
   }
 
+  handleEmptyItemsToDisplay(items: any[]) {
+    if (items.length < 1) items.push(this.defaultItemsMissingMessage);
+  }
+
   handleVeroniData(veroni: any) {
-    for (let item of veroni) {
-      if (this.isTodayAvailable(item.date)) {
-        for (item of item.item) {
-          this.veroniItemsToDisplay.push(item);
-        }
-      }
-    }
-    if (this.veroniItemsToDisplay.length < 1)
-      this.veroniItemsToDisplay.push(this.defaultItemsMissingMessage);
+    for (let item of veroni)
+      if (this.isTodayAvailable(item.date))
+        for (item of item.item) this.veroniItemsToDisplay.push(item);
+    this.handleEmptyItemsToDisplay(this.veroniItemsToDisplay);
   }
 
   handleSuziesData(suzies: any) {
-    for (let item of suzies) {
-      if (this.isTodayAvailable(item.date)) {
+    for (let item of suzies)
+      if (this.isTodayAvailable(item.date))
         this.suziesItemsToDiplay.push(
           `${item.title}: ${item.item.replace(/\s+/g, ' ')}`
         );
-      }
-    }
-    if (this.suziesItemsToDiplay.length < 1)
-      this.suziesItemsToDiplay.push(this.defaultItemsMissingMessage);
+    this.handleEmptyItemsToDisplay(this.suziesItemsToDiplay);
   }
 
   handleDenniData(denni: any) {
     for (let item of denni) {
       const date = item.date.replace(/\s+/g, '');
-      if (this.isTodayAvailable(` ${date}`)) {
-        for (let menuItem of item.item) {
-          this.denniItemsToDiplay.push(menuItem);
-        }
-      }
+      if (this.isTodayAvailable(` ${date}`))
+        for (let menuItem of item.item) this.denniItemsToDiplay.push(menuItem);
     }
-    if (this.denniItemsToDiplay.length < 1)
-      this.denniItemsToDiplay.push(this.defaultItemsMissingMessage);
+    this.handleEmptyItemsToDisplay(this.denniItemsToDiplay);
   }
 
   ngOnInit(): void {
