@@ -10,7 +10,7 @@ import { MenusService } from '../services/menus.service';
 export class ScraperComponent implements OnInit {
   currentDate = new Date();
   defaultItemsMissingMessage: string = 'No items in the menu for today';
-  veroniItemsToDisplay: string = this.defaultItemsMissingMessage;
+  veroniItemsToDisplay: string[] = [];
   suziesItemsToDiplay: string[] = [];
   denniItemsToDiplay: string[] = [];
 
@@ -30,10 +30,13 @@ export class ScraperComponent implements OnInit {
   handleVeroniData(veroni: any) {
     for (let item of veroni) {
       if (this.isTodayAvailable(item.date)) {
-        console.log('Pro tento den nebylo zadáno menu. ', item.item.toString());
-        this.veroniItemsToDisplay = item.item;
+        for (item of item.item) {
+          this.veroniItemsToDisplay.push(item);
+        }
       }
     }
+    if (this.veroniItemsToDisplay.length < 1)
+      this.veroniItemsToDisplay.push(this.defaultItemsMissingMessage);
   }
 
   handleSuziesData(suzies: any) {

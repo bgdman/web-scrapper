@@ -20,7 +20,7 @@
         </a>
       </td>
       <td>
-        <p>{{ veroniItemsToDisplay }}</p>
+        <p *ngFor="let item of veroniItemsToDisplay">{{ item }}</p>
       </td>
     </tr>
     <tr>
